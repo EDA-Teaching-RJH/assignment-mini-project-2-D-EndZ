@@ -28,6 +28,8 @@ class Sports_Car(Cars):
     def car_type(self):
         return "Sports" # will show the type of car displayed when requested to see the cars listed ad their info
     
+    def __str__(self):
+        return f"{self.make} {self.model} {self.year} {self.hp}hp {self.top_speed}mph - {self.owner_name}"
 
 class Super_Car(Cars):
     def __init__(self, make, model, year, owner_name, hp, top_speed, mode):
@@ -38,6 +40,9 @@ class Super_Car(Cars):
 
     def car_type(self):
         return "Super"
+
+    def __str__(self):
+        return f"{self.make} {self.model} {self.year} {self.hp}hp {self.top_speed}mph {self.mode} - {self.owner_name}"
 
 class Electric_Car(Cars):
     def __init__(self, make, model, year, owner_name, range):
