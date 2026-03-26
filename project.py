@@ -52,6 +52,8 @@ class Electric_Car(Cars):
     def car_type(self):
         return "Electric"
 
+    def __str__(self):
+        return f"{self.make} {self.model} {self.year} {self.range} - {self.owner_name}"
 
     
 
