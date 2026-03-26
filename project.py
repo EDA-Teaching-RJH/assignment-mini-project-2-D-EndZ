@@ -10,10 +10,13 @@ class Cars:
         self.make = make
         self.model = model
         self.year = int(year)
-        self.owner = owner_name
+        self.owner_name = owner_name
 
     def car_type(self):
         return "Car"
+    
+    def __str__(self):
+        return f"{self.make} {self.model} {self.year} - {self.owner_name}"
 
 class Sports_Car(Cars):
     # all sub classes of the base class Cars
@@ -60,11 +63,12 @@ class Owner:
             self.cars.append(car)
 
 class Service_Record:
+    # will represent any maintanance that needs to be added for the specific car
     def __init__(self, car_id, date, cost):
         self.car_id = car_id
         self.date = date
         self.cost = float(cost)
-        
+
         
     
 
