@@ -17,8 +17,13 @@ class Owner:
     # adding owner class to show who owns the specific car
     def __init__(self, name):
         self.name = name # e.g Dan Efoz
+        self.cars = [] # list of cars that the owner owns
+        if not name:
+            raise ValueError("Owner name is missing")
 
-    def add_car():
+    def add_car(self, car):
+        if car not in self.cars:
+            self.cars.append(car)
 
     
 
