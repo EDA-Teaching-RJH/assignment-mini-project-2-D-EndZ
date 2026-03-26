@@ -9,8 +9,20 @@ class Cars:
         # e.g. Car("Ferrari", "F40", 1992, Dan Efoz)
         self.make = make
         self.model = model
-        self.year = year
+        self.year = int(year)
         self.owner = owner_name
+
+    def car_type(self):
+        return "Car"
+
+
+
+class Sports_Car(Cars):
+    def __init__(self, make, model, year, owner_name):
+        super().__init__(make, model, year, owner_name)
+
+
+
     
 
 class Owner:
@@ -28,7 +40,8 @@ class Owner:
     
 
 def display_menu():
+    # when code is run this should be the first thing to come up
     print("Welcome to the Car Management System")
     choice = input("Choose what you like to do today")
-    
+
         
