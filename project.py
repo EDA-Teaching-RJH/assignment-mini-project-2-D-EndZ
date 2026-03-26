@@ -15,12 +15,34 @@ class Cars:
     def car_type(self):
         return "Car"
 
-
-
 class Sports_Car(Cars):
-    def __init__(self, make, model, year, owner_name):
+    # all sub classes of the base class Cars
+    def __init__(self, make, model, year, owner_name, hp, top_speed):
         super().__init__(make, model, year, owner_name)
+        self.hp = int(hp)
+        self.top_speed = int(top_speed)
 
+    def car_type(self):
+        return "Sports" # will show the type of car displayed when requested to see the cars listed ad their info
+    
+
+class Super_Car(Cars):
+    def __init__(self, make, model, year, owner_name, hp, top_speed, mode):
+        super().__init__(make, model, year, owner_name)
+        self.hp = int(hp)
+        self.top_speed = int(top_speed)
+        self.mode = mode
+
+    def car_type(self):
+        return "Super"
+
+class Electric_Car(Cars):
+    def __init__(self, make, model, year, owner_name, range):
+        super().__init__(make, model, year, owner_name)
+        self.range = int(range)
+
+    def car_type(self):
+        return "Electric"
 
 
     
