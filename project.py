@@ -22,10 +22,13 @@ class Owner:
             raise ValueError("Owner name is missing")
 
     def add_car(self, car):
-        if car not in self.cars:
+        if car not in self.cars: # makes sure cars aren't duplicated
             self.cars.append(car)
 
     
 
-
+def display_menu():
+    print("Welcome to the Car Management System")
+    choice = input("Choose what you like to do today")
+    
         
