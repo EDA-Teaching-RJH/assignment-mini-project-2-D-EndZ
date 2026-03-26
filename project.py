@@ -59,6 +59,13 @@ class Owner:
         if car not in self.cars: # makes sure cars aren't duplicated
             self.cars.append(car)
 
+class Service_Record:
+    def __init__(self, car_id, date, cost):
+        self.car_id = car_id
+        self.date = date
+        self.cost = float(cost)
+        
+        
     
 
 def display_menu():
