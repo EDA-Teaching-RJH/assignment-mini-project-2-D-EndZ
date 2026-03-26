@@ -69,12 +69,18 @@ class Owner:
         if car not in self.cars: # makes sure cars aren't duplicated
             self.cars.append(car)
 
+    def __str__(self):
+        return f"{self.name}"
+
 class Service_Record:
     # will represent any maintanance that needs to be added for the specific car
     def __init__(self, car_id, date, cost):
         self.car_id = car_id
         self.date = date
         self.cost = float(cost)
+
+    def __str__(self):
+        return f"{self.date}: (£{self.cost})"
 
         
     
