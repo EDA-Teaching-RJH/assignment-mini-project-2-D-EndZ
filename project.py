@@ -127,6 +127,31 @@ def load_cars():
             cars.append(car)
     return cars
 
+def save_car(car):
+    # saves one car object to the csv file
+    car_type = car.car_type()
+
+    with open("cars.csv", "a", newline="") as f:
+        w = csv.writer(f)
+
+        if car_type == "Electric":
+            w.writerow(["Electric", car.make, car.model, car.year, car.owner_name,
+                        car.range, "", "", ""])
+
+        elif car_type == "Sports":
+            w.writerow(["Sports", car.make, car.model, car.year, car.owner_name,
+                        "", car.hp, car.top_speed, ""])
+
+        elif car_type == "Super":
+            w.writerow(["Super", car.make, car.model, car.year, car.owner_name,
+                        "", car.hp, car.top_speed, car.mode])
+
+        else:
+            # basic car
+            w.writerow(["Car", car.make, car.model, car.year, car.owner_name,
+                        "", "", "", ""])
+
+
 
 
 
