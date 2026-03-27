@@ -97,6 +97,38 @@ def setup_files_csv():
             w = csv.writer(f)
             w.writerow(["CarID", "Date", "Cost"])
 
+def load_cars():
+    #will load all the cars from the csv file into objects
+    cars = []
+    with open("cars.csv", "r") as f:
+        reader = csv.reader(f)
+        next(reader) # will skip the header row
+        for row in reader:
+            car_type = row[0]
+            make = row[1]
+            model = row[2]
+            year = row[3]
+            owner = row[-1] # meaning it will always be the last row
+
+            # these might be empty depending on the car type
+            range = row[5]
+            hp = row[6]
+            top_speed = row[7]
+            mode = row[8]
+
+            if car_type == "Electric":
+                car = Electric_Car(make, model, year, owner, range) # eg electric car only has range as extra 
+            elif car_type == "Sports":
+                car = Sports_Car(make, model, year, owner, hp, top_speed)
+            elif car_type == "Super":
+                car = Super_Car(make, model, year, owner, hp, top_speed, mode)
+            else:
+                car = Cars(make, model, year, owner)
+            cars.append(car)
+    return cars
+
+
+
 
 def display_menu():
     # when code is run this should be the first thing to come up
