@@ -160,6 +160,11 @@ def load_services():
             services.append(row)
     return services    
 
+def save_service(car_id, date, cost):
+    with open("services.csv", "a", newline="") as f:
+        w = csv.writer(f)
+        w.writerow([car_id, date, cost])
+
 
 
 
