@@ -172,6 +172,38 @@ def valid_plate(plate):
     pattern = r"^[A-Z]{2}[0-9]{2} [A-Z]{3}$"
     return re.match(pattern, plate) is not None
 
+def add_car():
+    print("\nAdd Your Car")
+    make = input("Make: ")
+    model = input("Model: ")
+    year = input("Year: ")
+    owner = input("Owner: ")
+
+    plate = input("Enter your license plate (AB12 XYZ)").upper()
+    if not valid_plate(plate): # uses the reg ex rules to check if the license plate is valid
+        print("License Plate not valid")
+        return
+    
+    #pretty self explanitory i think
+    print("1.Standard\n2.Sports\n3.Super\n4.Electric")
+    t = input("Type: ")
+    if t == "2":
+        hp = input("Horsepower: ")
+        top_speed = input("Top Speed: ")
+        car = Sports_Car(make, model, year, plate, owner, hp, top_speed)
+    elif t == "3":
+        hp = input("Horsepower: ")
+        top_speed = input("Top Speed: ")
+        mode = input("What mode has it got: ")
+        car = Super_Car(make, model, year, plate, owner, hp, top_speed, mode)
+    elif t == "4":
+        range = input("Range in miles: ")
+        car = Electric_Car(make, model, year, plate, owner, range)
+    else:
+        car = Cars(make, model, year, plate, owner)
+
+    save_car(car)
+    cowsay.cow("Car added!") #added use of external libraries
 
 def display_menu():
     # when code is run this should be the first thing to come up
