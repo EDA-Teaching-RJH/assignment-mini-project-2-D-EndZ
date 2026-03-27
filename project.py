@@ -241,6 +241,25 @@ def add_service_record():
     save_service(car_id, date, cost)
     print("Service record saved.")
 
+def list_services():
+    print("\nService Records:")
+    services = load_services()
+    cars = load_cars()
+    if not services:
+        print("No service records.")
+        return
+    
+    index = 1  # manual counter 
+
+    for s in services:
+        car_index = int(s[0]) - 1  # convert car number to list index
+        if 0 <= car_index < len(cars):
+            # print service with car info
+            print(f"{index}. {cars[car_index]} -> Date: {s[1]}, Cost: £{s[2]}")
+
+        index += 1
+
+
 
 
 def display_menu():
