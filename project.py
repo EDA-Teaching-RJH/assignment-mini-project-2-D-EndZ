@@ -3,15 +3,17 @@ import csv
 import os       
 import random  
 import cowsay
+import re
 
 class Cars:
     #This is the base class where most of the functions will be
-    def __init__(self, make, model, year, owner_name):
+    def __init__(self, make, model, year, plate, owner_name):
         # e.g. Car("Ferrari", "F40", 1992, Dan Efoz)
         self.make = make
         self.model = model
         self.year = int(year)
         self.owner_name = owner_name
+        self.plate = plate
 
     def car_type(self):
         return "Car"
@@ -21,8 +23,8 @@ class Cars:
 
 class Sports_Car(Cars):
     # all sub classes of the base class Cars
-    def __init__(self, make, model, year, owner_name, hp, top_speed):
-        super().__init__(make, model, year, owner_name)
+    def __init__(self, make, model, year, plate, owner_name, hp, top_speed):
+        super().__init__(make, model, year, plate, owner_name)
         self.hp = int(hp)
         self.top_speed = int(top_speed)
 
@@ -33,8 +35,8 @@ class Sports_Car(Cars):
         return f"{self.make} {self.model} {self.year} {self.hp}hp {self.top_speed}mph - {self.owner_name}"
 
 class Super_Car(Cars):
-    def __init__(self, make, model, year, owner_name, hp, top_speed, mode):
-        super().__init__(make, model, year, owner_name)
+    def __init__(self, make, model, year, plate, owner_name, hp, top_speed, mode):
+        super().__init__(make, model, year, plate, owner_name)
         self.hp = int(hp)
         self.top_speed = int(top_speed)
         self.mode = mode
@@ -46,8 +48,8 @@ class Super_Car(Cars):
         return f"{self.make} {self.model} {self.year} {self.hp}HP {self.top_speed}mph {self.mode} - {self.owner_name}"
 
 class Electric_Car(Cars):
-    def __init__(self, make, model, year, owner_name, range):
-        super().__init__(make, model, year, owner_name)
+    def __init__(self, make, model, year, plate, owner_name, range):
+        super().__init__(make, model, year, plate, owner_name)
         self.range = int(range)
 
     def car_type(self):
@@ -89,7 +91,7 @@ def setup_files_csv():
     if not os.path.exists("cars.csv"):
         with open("cars.csv", "w", newline="") as f:
             w = csv.writer(f)
-            w.writerow(["Type", "Make", "Model", "Year", "Owner_Name",
+            w.writerow(["Type", "Make", "Model", "Year", "Plate", "Owner_Name",
                          "Range", "HP", "TopSpeed", "Mode"])
 
     if not os.path.exists("services.csv"):
@@ -108,6 +110,7 @@ def load_cars():
             make = row[1]
             model = row[2]
             year = row[3]
+            plate = row[4]
             owner = row[-1] # meaning it will always be the last row
 
             # these might be empty depending on the car type
@@ -117,13 +120,13 @@ def load_cars():
             mode = row[8]
 
             if car_type == "Electric":
-                car = Electric_Car(make, model, year, owner, range) # eg electric car only has range as extra 
+                car = Electric_Car(make, model, year, plate, owner, range) # eg electric car only has range as extra 
             elif car_type == "Sports":
-                car = Sports_Car(make, model, year, owner, hp, top_speed)
+                car = Sports_Car(make, model, year, plate, owner, hp, top_speed)
             elif car_type == "Super":
-                car = Super_Car(make, model, year, owner, hp, top_speed, mode)
+                car = Super_Car(make, model, year, plate, owner, hp, top_speed, mode)
             else:
-                car = Cars(make, model, year, owner)
+                car = Cars(make, model, year, plate, owner)
             cars.append(car)
     return cars
 
@@ -135,20 +138,20 @@ def save_car(car):
         w = csv.writer(f)
 
         if car_type == "Electric":
-            w.writerow(["Electric", car.make, car.model, car.year, car.owner_name,
+            w.writerow(["Electric", car.make, car.model, car.year, car.plate, car.owner_name,
                         car.range, "", "", ""])
 
         elif car_type == "Sports":
-            w.writerow(["Sports", car.make, car.model, car.year, car.owner_name,
+            w.writerow(["Sports", car.make, car.model, car.year, car.plate, car.owner_name,
                         "", car.hp, car.top_speed, ""])
 
         elif car_type == "Super":
-            w.writerow(["Super", car.make, car.model, car.year, car.owner_name,
+            w.writerow(["Super", car.make, car.model, car.year, car.plate, car.owner_name,
                         "", car.hp, car.top_speed, car.mode])
 
         else:
             # basic car
-            w.writerow(["Car", car.make, car.model, car.year, car.owner_name,
+            w.writerow(["Car", car.make, car.model, car.year, car.plate, car.owner_name,
                         "", "", "", ""])
 
 def load_services():
@@ -165,7 +168,9 @@ def save_service(car_id, date, cost):
         w = csv.writer(f)
         w.writerow([car_id, date, cost])
 
-
+def valid_plate(plate):
+    pattern = r"^[A-Z]{2}[0-9]{2} [A-Z]{3}$"
+    return re.match(pattern, plate) is not None
 
 
 def display_menu():
