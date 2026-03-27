@@ -218,6 +218,30 @@ def list_cars():
         print(f"{i}. {c}")
         i += 1
 
+def add_service_record():
+    print("\nAdd Service Record")
+
+    cars = load_cars()
+    if not cars:
+        print("No cars available.")
+        return
+
+    # show cars so the user knows which one to pick
+    print("\nSelect a car:")
+    i = 1
+    for c in cars:
+        print(f"{i}. {c}")
+        i += 1
+
+    car_id = input("Enter car number: ")
+
+    date = input("Service date (YYYY-MM-DD): ")
+    cost = input("Service cost: ")
+
+    save_service(car_id, date, cost)
+    print("Service record saved.")
+
+
 
 def display_menu():
     # when code is run this should be the first thing to come up
