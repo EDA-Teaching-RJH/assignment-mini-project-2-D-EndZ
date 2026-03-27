@@ -111,13 +111,14 @@ def load_cars():
             model = row[2]
             year = row[3]
             plate = row[4]
-            owner = row[-1] # meaning it will always be the last row
+            owner = row[5] 
 
             # these might be empty depending on the car type
-            range = row[5]
-            hp = row[6]
-            top_speed = row[7]
-            mode = row[8]
+            range = row[6] if row[6] != "" else 0 # allows it to run even if the value is empty
+            hp = row[7] if row[7] != "" else 0
+            top_speed = row[8] if row[8] != "" else 0
+            mode = row[9]
+            # made changes to this because the other way kept crashing due to hp being empty because of the way i wrote the csv file
 
             if car_type == "Electric":
                 car = Electric_Car(make, model, year, plate, owner, range) # eg electric car only has range as extra 
@@ -259,12 +260,34 @@ def list_services():
 
         index += 1
 
+def main():
+    setup_files_csv()
+    # when code is run  this should be the first thing to come up
+    while True:
+        print("Welcome to the Car Management System")
+        print("1. Add Car")
+        print("2. List Cars")
+        print("3. Add Service Record")
+        print("4. List Service Records")
+        print("5. Exit")
 
+        choice = input("Choose what you like to do today ")
 
+        if choice == "1":
+            add_car()
+        elif choice == "2":
+            list_cars()
+        elif choice == "3":
+            add_service_record()
+        elif choice == "4":
+            list_services()
+        elif choice == "5":
+            print("Later g ...")
+            break
+        else:
+            print("Invalid Option g")
 
-def display_menu():
-    # when code is run this should be the first thing to come up
-    print("Welcome to the Car Management System")
-    choice = input("Choose what you like to do today")
+if __name__ == "__main__":
+    main()
 
         
