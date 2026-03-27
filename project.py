@@ -205,6 +205,20 @@ def add_car():
     save_car(car)
     cowsay.cow("Car added!") #added use of external libraries
 
+def list_cars():
+    print("\nCars:")
+    cars = load_cars()
+
+    if not cars:
+        print("No cars.")
+        return
+
+    i = 1   # manual counter
+    for c in cars:
+        print(f"{i}. {c}")
+        i += 1
+
+
 def display_menu():
     # when code is run this should be the first thing to come up
     print("Welcome to the Car Management System")
