@@ -151,6 +151,14 @@ def save_car(car):
             w.writerow(["Car", car.make, car.model, car.year, car.owner_name,
                         "", "", "", ""])
 
+def load_services():
+    services = []
+    with open("services.csv", "r") as f:
+        reader = csv.reader(f)
+        next(reader)
+        for row in reader:
+            services.append(row)
+    return services    
 
 
 
