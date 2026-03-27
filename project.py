@@ -2,6 +2,7 @@ import sys
 import csv      
 import os       
 import random  
+import cowsay
 
 class Cars:
     #This is the base class where most of the functions will be
@@ -42,7 +43,7 @@ class Super_Car(Cars):
         return "Super"
 
     def __str__(self):
-        return f"{self.make} {self.model} {self.year} {self.hp}hp {self.top_speed}mph {self.mode} - {self.owner_name}"
+        return f"{self.make} {self.model} {self.year} {self.hp}HP {self.top_speed}mph {self.mode} - {self.owner_name}"
 
 class Electric_Car(Cars):
     def __init__(self, make, model, year, owner_name, range):
@@ -80,10 +81,22 @@ class Service_Record:
         self.cost = float(cost)
 
     def __str__(self):
-        return f"{self.date}: (£{self.cost})"
+        return f"{self.date}:x (£{self.cost})"
 
         
-    
+def setup_files_csv():
+    # creates a new file called cars.csv/ servives.csv, opens it in write mode, creates a csv writer, then writes the header rows listed down below
+    if not os.path.exists("cars.csv"):
+        with open("cars.csv", "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["Type", "Make", "Model", "Year", "Owner_Name",
+                         "Range", "HP", "TopSpeed", "Mode"])
+
+    if not os.path.exists("services.csv"):
+        with open("services.csv", "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["CarID", "Date", "Cost"])
+
 
 def display_menu():
     # when code is run this should be the first thing to come up
